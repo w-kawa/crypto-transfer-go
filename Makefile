@@ -7,4 +7,10 @@ createdb:
 dropdb:
 	docker exec -it some-postgres dropdb --username=postgres simple_crypto_exchange
 
-.PHONY: postgres createdb dropdb
+migrateup:
+	migrate -path db/migration -database "postgresql://postgres:mysecretpassword@localhost:5432/simple_crypto_exchange?sslmode=disable" -verbose up
+
+migratedown:
+	migrate -path db/migration -database "postgresql://postgres:mysecretpassword@localhost:5432/simple_crypto_exchange?sslmode=disable" -verbose down
+	
+.PHONY: postgres createdb dropdb migrateup migratedown
