@@ -13,4 +13,8 @@ migrateup:
 migratedown:
 	migrate -path db/migration -database "postgresql://postgres:mysecretpassword@localhost:5432/simple_crypto_exchange?sslmode=disable" -verbose down
 	
-.PHONY: postgres createdb dropdb migrateup migratedown
+sqlc:
+	sqlc generate
+
+
+.PHONY: postgres createdb dropdb migrateup migratedown sqlc
